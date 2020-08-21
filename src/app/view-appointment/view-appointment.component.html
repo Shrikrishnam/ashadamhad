@@ -1,0 +1,35 @@
+<!-- <router-outlet></router-outlet> -->
+<!-- <form action="POST" id="my-form"><router-outlet></router-outlet></form>
+ -->
+ <router-outlet></router-outlet>
+<div class="table-responsive">
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="h1" scope="col">Sl NO</th>
+        <th class="h2" scope="col">Name</th>
+        <th class="h3" scope="col">Address</th>
+        <th class="h4" scope="col">City</th>
+        <th class="h5" scope="col">Package</th>
+        <th class="h6" scope="col">Trainer Preference</th>
+        <th class="h7" scope="col">Phone</th>
+        <!-- <th scope="col">Delete</th>
+        <th scope="col">Edit</th>  -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fitness of fitnessData">
+        <td>{{fitness.id}}</td>
+        <td>{{fitness.firstname + ' ' + fitness.lastname}}</td>
+        <td>{{fitness.streetaddress}}</td>
+        <td>{{fitness.city}}</td>
+        <td>{{fitness.package}}</td>
+        <td>{{fitness.trainerpreference}}</td>
+        <td>{{fitness.phonenumber}}</td>
+        <td><i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="deletefitness(fitness)"></i></td>
+        <td><i class="fas fa-user-edit text-info" style="cursor: pointer;" (click)="editfitness(fitness)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,164 @@
+<form [formGroup]="fitnessForm" novalidate >
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" placeholder="Enter first name" #firstInput formControlName="firstname" autofocus>
+      <!-- {{ firstInput.focus() }} -->
+      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger">
+            <div *ngIf="firstname.errors.required">
+                First name is required.
+            </div>
+            <div *ngIf="firstname.errors.pattern">
+                First name must not contain numbers and should be greater than one charecter length.
+            </div>
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" id="lastname" placeholder="Enter last name" formControlName="lastname">
+        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger">
+            <div *ngIf="lastname.errors.required">
+                Last name is required.
+            </div>
+            <div *ngIf="lastname.errors.pattern">
+                Last name must not contain numbers and should be greater than one charecter length.
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter Age" formControlName="age">
+        <div *ngIf="age.invalid && (age.dirty || age.touched)" class="alert alert-danger">
+            <div *ngIf="age.errors.required">
+                Age is required.
+            </div>
+            <div *ngIf="age.errors.min || age.error.max">
+                Age should be between 18 and 60.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone-number">Phone Number</label>
+        <input type="number" class="form-control" id="phonenumber" placeholder="Enter Phone Number" formControlName="phonenumber">
+        <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)" class="alert alert-danger">
+            <div *ngIf="phonenumber.errors.required">
+                Phonenumber is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter Email" formControlName="email">
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+            <div *ngIf="email.errors.pattern">
+                Enter valid email address.
+            </div>
+        </div>
+
+    </div>
+
+    <fieldset>
+        <div class="form-group">
+            <label for="streeaddress">Street Address</label>
+            <input type="text" class="form-control" id="streetaddress" placeholder="Enter Street Address" formControlName="streetaddress">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter City" formControlName="city">
+        </div>
+
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" placeholder="Enter State" formControlName="state">
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" placeholder="Enter Country" formControlName="country">
+        </div>
+
+        <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input type="number" class="form-control" id="pincode" placeholder="Enter Pincode" formControlName="pincode">
+
+            <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
+                <div *ngIf="pincode.errors.required">
+                    Pincode is required.
+                </div>
+                <div *ngIf="pincode.errors.pattern">
+                    Pincode length must be 6.
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        <label for="trainerpreference">Trainer Preference</label>
+        <select class="form-control" id="trainerpreference" formControlName="trainerpreference">
+          <option>Male Trainer</option>
+          <option>Female Trainer</option>
+          <option>No Prefrence</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="physiotherapistreq">Physiotherapist Required</label>
+        <select class="form-control" id="physiotherapistreq" formControlName="physiotherapist">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="package">Select a package</label>
+        <select class="form-control" id="packages"  (change)="calculate($event.target.value)">
+          <option value="Opt1">One time session only (Rs 500)</option>
+          <option value="Opt2">6 Week session (Rs 400/Session)</option>
+          <option value="Opt3">12 Week session (Rs 300/Session)</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="total">Total Amount</label>
+        <div class="ml-2" >
+
+            <div class="form-group">
+                <label for="paisa">Rupees</label>
+                <input type="text" Placeholder="INR" formControlName="inr" readonly style="border: none; border-color: transparent;">
+                <div *ngIf="inr.invalid && (inr.dirty || inr.touched)" class="alert alert-danger">
+                    <div *ngIf="inr.errors.required">
+                        INR is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="paisa">Paisa</label>
+                <input type="text" Placeholder="Paisa" formControlName="paisa" readonly style="border: none; border-color: transparent;">
+                <div *ngIf="paisa.invalid && (paisa.dirty || paisa.touched)" class="alert alert-danger">
+                    <div *ngIf="paisa.errors.required">
+                        Paisa is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!fitnessForm.valid" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+  </form>
+ 
